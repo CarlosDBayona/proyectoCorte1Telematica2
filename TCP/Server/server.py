@@ -1,5 +1,6 @@
 import socket
 import os
+import time
 import sys
 
 TCP_IP = "127.0.0.1"
@@ -8,7 +9,7 @@ DATA_PORT = 5006
 buf = 1024
 file_name = sys.argv[1]
 
-
+start = time.time()
 try:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((TCP_IP, FILE_PORT))
@@ -24,3 +25,5 @@ try:
 finally:
     sock.close()
     f.close()
+stop = time.time()
+print(stop-start)

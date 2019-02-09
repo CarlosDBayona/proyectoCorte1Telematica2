@@ -11,8 +11,8 @@ file_name = sys.argv[1]
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.sendto(bytearray( file_name, "utf-8"), (UDP_IP, UDP_PORT))
 print ("Sending %s ..." % file_name)
-
-f = open(file_name, "r")
+start = time.time()
+f = open(file_name, "rb")
 data = f.read(buf)
 while(data):
     if(sock.sendto(data, (UDP_IP, UDP_PORT))):
@@ -21,3 +21,6 @@ while(data):
 
 sock.close()
 f.close()
+stop = time.time()
+
+print(stop-start)
