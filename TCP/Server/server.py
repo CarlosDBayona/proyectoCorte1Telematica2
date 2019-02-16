@@ -19,8 +19,11 @@ try:
     f = open(file_name, "rb")
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((TCP_IP, DATA_PORT))
-    data = f.read()
-    sock.send(data)
+    data = f.read(buf)
+    while(data):
+        if(sock.send(data)):
+            data = f.read(buf)
+            time.sleep(0.02) # Give receiver a bit time to save
 
 finally:
     sock.close()
